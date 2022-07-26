@@ -1,0 +1,46 @@
+use universolector;
+CREATE TABLE `Socio` (
+  `Codigo` int(8) NOT NULL,
+  `DNI` int(10) DEFAULT NULL,
+  `Apellido` varchar(100) NOT NULL,
+  `Nombres` varchar(100) NOT NULL,
+  `Direccion` varchar(200) NOT NULL,
+  `Localidad` varchar(100) NOT NULL,
+  PRIMARY KEY (`Codigo`)
+  );
+ 
+ CREATE TABLE `TelefonoxSocio`(
+  `Codigo` int(8) NOT NULL,
+  `NroTelefono` varchar(100) NOT NULL,
+  `CodigoSocio` int NOT NULL,
+  PRIMARY KEY (`IdTelefonoSocio`),
+  FOREIGN KEY (`CodigoSocio`) REFERENCES `Socio` (`Codigo`)
+  );
+ 
+ CREATE TABLE `Prestamo`(
+  `Codigo` int(8) NOT NULL,
+  `CodigoSocio` int(8) NOT NULL,
+  `Fecha` datetime NOT NULL,
+  `Fecha_Devolucion` date NOT NULL,
+  `Fecha_Tope` date NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  FOREIGN KEY (`CodigoSocio`) REFERENCES `Socio` (`Codigo`)
+  );
+ 
+  CREATE TABLE `PrestamoVolumen`(
+  `Codigo` int(8) NOT NULL,
+  `CodigoPrestamo` int NOT NULL,
+  `CodigoVolumen` int(8) NOT NULL,
+  PRIMARY KEY (`Codigo`),
+  FOREIGN KEY (`CodigoPrestamo`) REFERENCES `Prestamo` (`Codigo`),
+  FOREIGN KEY (`CodigoVolumen`) REFERENCES `Volumen` (`Codigo`)
+  );
+  
+  CREATE TABLE `Volumen`(
+  `Codigo` int(8) NOT NULL,
+  `Deteriorado` int NOT NULL,
+  `CodigoVolumen` int NOT NULL,
+  PRIMARY KEY (`Codigo`)
+  )
+ 
+ 

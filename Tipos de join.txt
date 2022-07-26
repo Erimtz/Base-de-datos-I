@@ -1,0 +1,116 @@
+                                       BASES DE DATOS
+			
+            TIPOS DE JOIN
+			
+      INNER JOIN 
+- El inner join entre dos tablas devuelve únicamente los
+registros que cumplen a condición indicada en la cláusula ON
+
+
+EJ:
+
+SELECT  columna1, columna2, ...
+FROM tabla A 
+INNER JOIN tabla B
+ON condicion
+
+-El INNER JOIN es la opción predeterminada y nos devuelve
+todos los registros donde se cruzan dos o más tablas. 
+
+EJ:
+SELECT factura.id AS nro_factura, apellido, nombre, fecha
+FROM cliente 
+INNER JOIN factura
+ON cliente.id = factura.cliente_id;
+
+						
+          LEFT
+
+El LEFT JOIN entre dos tablas devuelve todos los registros de 
+la priemra tabla, incluso cuando los registros no cumplan la condición
+indicada en la cláusula ON.
+
+EJ:
+
+SELECT columna1, columna2, ..
+FROM tabla A
+LEFT JOIN tabla B
+ON condicion
+
+>LEFT JOIN nos devueve todos los registros donde s cruzan dos o más
+tablas. Invludo los registros de una pimera tabla (A) que NO CUMPLAN
+con la condición indicada en la cláusula ON. 
+
+EJ:
+
+SELECT factura.id AS nro_factura, apellido, nombre, fecha
+FROM cliente 
+LEFT JOIN factura
+ON cliente.id = factura.cliente_id;
+
+        LEFT Excluding
+Este tipo de LEFT JOIN nos devuelve únicamente los 
+registros de una primera tabla (A), excluyendo los registros que cumplan con la condición indicada en la cláusula ON. 
+
+EJ:
+SELECT factura.id AS nro_factura, apellido, nombre, fecha
+FROM cliente
+LEFT JOIN factura
+ON cliente.id = factura.cliente_id
+WHERE ISNULL(factura.id);
+
+          RIGHT JOIN
+El rigth join entre dos tablas devuelver todos los registros de la 
+segunda tabla, incluso cuando los registros no cumplan la condicion en la 
+cláusula ON.
+
+EJ:
+SELECT columna1, columna2,..
+FROM tabla A
+RIGHT JOIN tabla B
+ON condición		  
+
+       RIGHT Excluding.			
+Rigth join nos devuelve todos los regustros donde se cruzan dos o más
+tablas. Incluso los registros de una segunda tabla (B) que NO CUMPLAN con la 
+condición indicada en ON. 
+
+EJ: 
+SELECT factura.id AS nro_factura, apellido, nombre, fecha
+FROM cliente
+RIGHT JOIN factura
+ON cliente.id = factura.cliente_id
+WHERE ISNULL(cliente.id);
+						 
+						 
+						 
+						 IMPORTANTE
+						 
+	¿Qué tipo de JOIN devuelve todos los registros de la segunda tabla a pesar de que no cumplan con la condición del ON?
+-> RIGHT
+
+	¿Qué consulta debemos hacer para mostrar todos los registros de la tabla “autor”, incluso aquellos que no tienen un libro asignado dentro de nuestra BD?
+	
+->SELECT * FROM libro l RIGHT JOIN libro_x_autor lxa ON lxa.libro_id = l.id RIGHT JOIN autor a ON a.id = lxa.autor_id;	
+						
+	¿Es verdad que la cláusula LEFT JOIN devuelve todos los registros de la primera tabla a pesar de que no cumplan con la condición del ON?
+->TRUE
+
+    
+    ¿Qué consulta debemos realizar para visualizar todos los registros de la tabla “libro”, incluyendo aquellos que no tienen un autor asignado dentro de nuestra BD?
+
+-> 	SELECT * FROM libro l LEFT JOIN libro_x_autor lxa ON lxa.libro_id = l.id LEFT JOIN autor a ON a.id = lxa.autor_id;
+ 
+    ¿Es correcto decir que la cláusula INNER JOIN devuelve todos los registros de la primera tabla a pesar de que no cumplan con la condición del ON?
+
+-> FALSE
+
+
+
+    ¿Cómo debemos armar una consulta para traer solamente los registros de los libros que tienen asignado un autor?
+	
+->  SELECT * FROM libro l INNER JOIN libro_x_autor lxa ON lxa.libro_id = l.id INNER JOIN autor a ON a.id = lxa.autor_id;
+
+    Agreguemos algo de complejidad: ¿qué consulta debemos armar para visualizar todos los registros de la tabla “libro”, excluyendo aquellos que tienen un autor asignado dentro de nuestra BD?
+
+->	SELECT * FROM libro l LEFT JOIN libro_x_autor lxa ON lxa.libro_id = l.id LEFT JOIN autor a ON a.id = lxa.autor_id WHERE ISNULL(a.id);

@@ -1,0 +1,142 @@
+  -- CATEGORIAS Y PRODUCTOS
+-- 1. Queremos tener un listado de todas las categorías.
+    /*select * from categorias*/
+-- 2. Cómo las categorías no tienen imágenes, solamente interesa obtener un
+-- listado de CategoriaNombre y Descripcion.
+    /* select CategoriaNombre, Descripcion from categorias*/
+
+-- 3. Obtener un listado de los productos.
+     /*select * from productos*/
+-- 4. ¿Existen productos discontinuados? (Discontinuado = 1).
+     /*select ProductoNombre from productos
+     where Discontinuado = 0*/
+     
+-- 5. Para el viernes hay que reunirse con el Proveedor 8. ¿Qué productos son
+-- los que nos provee?
+  /*select *  from productos
+  where ProveedorID = 8*/
+  
+-- 6. Queremos conocer todos los productos cuyo precio unitario se encuentre
+-- entre 10 y 22.
+   /*select * from productos
+   where PrecioUnitario between 10 and 22*/
+
+-- 7. Se define que un producto hay que solicitarlo al proveedor si sus unidades
+-- en stock son menores al Nivel de Reorden. ¿Hay productos por solicitar?
+   /*select ProductoID from productos
+   where UnidadesStock < NivelReorden*/
+-- 8. Se quiere conocer todos los productos del listado anterior, pero que
+-- unidades pedidas sea igual a cero.
+   /*select ProductoID from productos
+   where UnidadesPedidas = 0*/
+   
+-- CLIENTES
+-- 1. Obtener un listado de todos los clientes con Contacto, Compania, Título,
+-- País. Ordenar el listado por País.
+ /* select Contacto, Compania, Titulo, pais from clientes 
+  order by pais asc*/
+  
+-- 2. Queremos conocer a todos los clientes que tengan un título “Owner”.
+   /*select * from clientes
+   where titulo = "owner"*/
+   
+-- 3. El operador telefónico que atendió a un cliente no recuerda su nombre.
+-- Solo sabe que comienza con “C”. ¿Lo ayudamos a obtener un listado con
+-- todos los contactos que inician con la letra “C”?
+  /*select contacto from clientes
+  where contacto like "c%"*/
+  
+   
+   -- FACTURAS
+ -- 1. Obtener un listado de todas las facturas, ordenado por fecha de factura
+-- ascendente.
+   /*select * from facturas
+   order by FechaFactura asc*/
+
+-- 2. Ahora se requiere un listado de las facturas con el país de envío “USA” y
+-- que su correo (EnvioVia) sea distinto de 3.
+  /*select * from facturas
+  where PaisEnvio = "USA" and EnvioVia <> 3*/
+  
+-- 3. ¿El cliente 'GOURL' realizó algún pedido?
+/*select clienteID, facturaID from facturas
+where clienteID = 'GOURL'*/
+
+-- 4. Se quiere visualizar todas las facturas de los empleados 2, 3, 5, 8 y 9.
+ /*select EmpleadoID, FacturaID from facturas 
+ where EmpleadoID in (2, 3, 5, 8 and 9)*/
+ 
+ -- CONSULTAS QUERIES ML - PARTE II
+ -- PRODUCTOS
+ -- 1. Obtener el listado de todos los productos ordenados
+ -- descendentemente por precio unitario.
+   /*select * from productos
+   order by PrecioUnitario desc*/
+   
+-- 2. Obtener el listado de top 5 de productos cuyo precio unitario es
+-- el más caro.
+   /*select * from productos
+   where PrecioUnitario = 263.5*/
+   
+-- 3. Obtener un top 10 de los productos con más unidades en stock.
+   /*select ProductoNombre from productos
+   where UnidadesStock >= 10*/
+   
+  --  FacturaDetalle
+-- 1. Obtener un listado de FacturaID, Producto, Cantidad.
+  /*select facturaID, ProductoID, Cantidad from facturadetalle*/
+  
+-- 2. Ordenar el listado anterior por cantidad descendentemente.
+   /*select facturaID, ProductoID, Cantidad from facturadetalle
+   order by Cantidad desc*/
+   
+-- 3. Filtrar el listado solo para aquellos productos donde la cantidad
+-- se encuentre entre 50 y 100.
+   /*select facturaID, ProductoID, Cantidad from facturadetalle
+   where Cantidad between 50 and 100*/
+   
+-- 4. En otro listado nuevo, obtener un listado con los siguientes
+-- nombres de columnas: NroFactura (FacturaID), Producto,
+-- (ProductoID), Total (PrecioUnitario*Cantidad).
+   /*select facturaID, productoID, precioUnitario*Cantidad from facturadetalle*/
+  
+ -- EXTRAS
+ -- 1. Obtener un listado de todos los clientes que viven en “Brazil" o “Mexico”,
+-- o que tengan un título que empiece con “Sales”.
+   /*select contacto, titulo from clientes
+   where contacto = "Brazil" or "Mexico" or Titulo like "Sales"*/
+
+-- 2. Obtener un listado de todos los clientes que pertenecen a una compañía
+-- que empiece con la letra "A".
+   /*select * from clientes 
+   where Compania like "A%"*/
+   
+
+-- 3. Obtener un listado con los datos: Ciudad, Contacto y renombrarlo
+-- como Apellido y Nombre, Titulo y renombrarlo como Puesto, de todos
+-- los clientes que sean de la ciudad "Madrid".
+   /*select Ciudad as Nombre, Contacto as Nombre, Titulo as Puesto from clientes
+   where ciudad = "Madrid"*/
+
+-- 4. Obtener un listado de todas las facturas con ID entre 10000 y 10500
+  /*select * from facturas 
+  where FacturaID between 10000 and 10500*/
+
+-- 5. Obtener un listado de todas las facturas con ID entre 10000 y 10500 o de
+-- los clientes con ID que empiecen con la letra “B”.
+    /*select * from facturas 
+    where FacturaID between 10000 and 10500  like "B%"*/
+
+-- 6. ¿Existen facturas que la ciudad de envío sea “Vancouver” o que
+-- utilicen el correo 3?
+/*select * from facturas
+where CiudadEnvio = "Vancouver" or EnvioVia = 3*/
+
+-- 7. ¿Cuál es el ID de empleado de “Buchanan”?
+/*select empleadoID, Nombre, Apellido  from empleados
+where Apellido = "Buchanan"*/
+
+-- 8. ¿Existen facturas con EmpleadoID del empleado del ejercicio anterior?
+-- (No relacionar, sino verificar que existan facturas)
+/*select empleadoID, FacturaID from facturas
+where EmpleadoID = 5*/

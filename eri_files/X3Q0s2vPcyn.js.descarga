@@ -1,0 +1,4 @@
+if (self.CavalryLogger) { CavalryLogger.start_js(["XaiLaVT"]); }
+
+__d("CometPhotoReviewRootQuery$Parameters",[],(function(a,b,c,d,e,f){"use strict";a={kind:"PreloadableConcreteRequest",params:{id:"4547276838628506",metadata:{},name:"CometPhotoReviewRootQuery",operationKind:"query",text:null}};e.exports=a}),null);
+__d("CometPhotoReviewRoot.entrypoint",["CometPhotoReviewRootQuery$Parameters","JSResourceForInteraction","WebPixelRatio","buildCometActivityLogRoute.entrypoint"],(function(a,b,c,d,e,f,g){"use strict";a=c("buildCometActivityLogRoute.entrypoint")(c("JSResourceForInteraction")("CometPhotoReviewRoot.react").__setRef("CometPhotoReviewRoot.entrypoint"),function(a){return{queries:{CometPhotoReviewQueryReference:{parameters:b("CometPhotoReviewRootQuery$Parameters"),variables:{feedLocation:"PHOTO_REVIEW",privacySelectorRenderLocation:"COMET_PHOTO_REVIEW",renderLocation:"photo_review",scale:d("WebPixelRatio").get(),useDefaultActor:!0}}}}});g["default"]=a}),98);

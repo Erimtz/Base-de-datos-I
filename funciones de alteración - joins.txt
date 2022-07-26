@@ -1,0 +1,159 @@
+                  BASES DE DATOS I
+				  
+  TABLE REFERENCE
+ Es posible que necesitemos hacer una consulta a más de una tabla
+
+Ejemplo consulta en MY SQL
+
+SELECT clientes.id AS ID, Clientes.nombre, ventas.fecha
+FROM clientes, ventas
+WHERE clientes.id = ventas.cliente_id;
+
+                JOINS
+Establece uniones entre distintas tablas que tienen algún tipo de relación entre sí.				
+
+VENTAJAS DEL USO DE JOINS
+- Su sintaxis es mucho más comprensible
+- Presenta un mejor performance
+- Provee de ciertas flexibilidades
+
+
+    INNER JOIN
+Es la opción predeterminada y nos devuelve TODOS LOS REGISTROS donde se CRUZAN DOS O MÁS TABLAS.
+EJ: 
+TABLA -> Cliente y otra TABLA -> Factura
+
+Al cruzarlaas con INNER JOIN nos devuelve aquellos resgistros o filas donde haya un valor coincidente en ambas tablas.
+
+	
+	
+- ANTES CON TABLA REFERENCE escribiamos así:
+
+SELECT cliente.id, cliente.nombre, factura.fecha
+FROM cliente, factura;
+
+-> Y AHORA con el INNER JOIN escribimos:
+
+SELECT cliente.id, cliente.nombre, factura.fecha
+FROM cliente
+INNER JOIN factura;
+
+
+- EL FILTRO de INNER JOIN es ON -> Sin el ON no funciona el INNER JOIN
+
+
+                   DISTINC
+Distinc nos permite eliminar duplicados identicos de nuestra consulta 				   
+	
+ej
+    SELECT DISTINC pais FROM usuarios;
+	
+               
+			   FUNCIONES DE ALTERACIÓN
+Las funciones de alteración más comunes —y las que vamos a ver— son:
+
+
+ - CONCAT = concatenar dos o más expresiones
+ 
+ SQL> SELECT CONCAT ('Hola', 'a', 'todos.'):
+ 
+ 
+ DEVULVE -> Hola a todos
+ 
+ - COALESCE = Lo usamos para sustituir el valor de NULL en una de sus expresiones o campos.
+ 
+ 
+ SQL> SELECT COALESCE(NULL, 'Sin datos');
+ 
+ DEVULVE -> 'Sin datos'
+ 
+ 
+ Tambien podemos sustituir los DATOS NULOS en cada registro, indicando
+ la columna a evaluar y el valor de sustitución.
+ 
+ 
+ 
+ SQL> SELECT id, apellido, nombre, COALESCE(telefono_movil, telefono_fijo, 'Sin datos')
+      AS telefono FROM cliente;
+	  
+	   
+ - DATEDIFF = usamos DATEDIFF para devolver la DIFERENCIA entre dos fechas,
+ tomando como granularidad el intervalo especificado.
+ 
+ 
+ 
+ SQL> SELECT DATEDIFF('2021-02-03 12:45:00', '2021-01-01 07:00:00');
+ 
+ DEVULVE --> 33
+ 
+ 
+ - TIMEDIFF = usamos TIMEDIFF para devolver la diferencia entre dos horarios,
+ tomando como granularidad el intervalo especificado.
+ 
+ 
+ SQL> SELECT TIMEDIFF('18:45:00', '12:30:00');
+ 
+ DEVULVE -> 06:15:00
+ 
+
+ - EXTRACT = Usamos EXTRACT para extraer ´partes de una fecha.
+ 
+ SQL> SELECT EXTRACT(SECOND FROM '2014-02-13  08:44:21'); (aplica con: WEEK, MONTH, QUARTER, YEAR, HOUR, MINUTE, DAY)
+ 
+ DEVULVE -> 21
+ 
+ 
+ - REPLACE = Sirve para reemplazar una cadena de caracteres por otro valor. Cabe aclarar que esta función hace
+ distinción entre mayusculas y minusculas.
+ 
+ SQL> SELECT REPLACE('Buenas tardes', 'tardes'. 'noches');
+ 
+ DEVULVE-> Buenas noches
+ 
+ 
+ - DATE_FORMAT = Sirve para cambiar el formato de salida de una fecha según uan condición dada.
+ 
+ SQL> SELECT DATE_FORMAT('2017-06-15', '%Y');
+ 
+ DEVULVE -> 2017
+ 
+ *Para mostrar la fecha en español se debe configurar el idioma con la siguiente instrucción:
+ 
+ SQL> SET lc_time_names = 'es_ES';
+      SELECT DATE_FORMAT('2017-06-15', '%W, %e de %M de %Y');
+	  
+DEVULVE -> jueves, 15 de junio de 2017	  
+  
+  
+ - DATE_ADD = Sirve para sumar o agregar un periodo de tiempo a un valor de DATE O DATETIME.
+ 
+ SQL> SELECT DATE_ADD('2021-06-30', INTERVAL '3' DAY);
+ 
+ DEVULVE -> 2021-07-03
+ 
+ 
+ - DATE_SUB = Sirve para restar o quitar un peiodo de tiempo a un valor de tipo DATE o DATETIME.
+ 
+ SQL> SELECT DATE_SUB('2021-06-30', INTERVAL '3' DAY');
+ 
+ 
+ DEVULVE -> 2021-06-27
+ 
+ 
+ CASE = Sirve para EVALUAR CONDICIONES y devolver la primera condición que se cumpla.
+
+SQL> SELECT id, titulo, rating,
+     
+     CASE 
+     WHEN rating < 4 THEN 'Mala'	
+     WHEN rating BETWEEN 4 AND 6 THEN 'Regular'
+     WHEN rating BETWEEN 7 AND 9 THEN 'Buena'
+     ELSE 'Excelente'
+     END AS calificación 
+    FROM pelicula;	 
+ 
+ 
+ Existen muchas más que las podrás encontrar en el manual de referencia de MySQL. 
+ Antes, veamos de qué se trata: https://dev.mysql.com/doc/refman/8.0/en/
+ 
+ 

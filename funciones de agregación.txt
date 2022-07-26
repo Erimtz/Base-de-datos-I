@@ -1,0 +1,101 @@
+BASE DE DATOS
+
+FUNCIONES DE AGREGACIÓN
+Las funciones de agregación realizan cálculos sobre un conjunto de datos
+y devuelven un único resultado. Excepto COUNT, las funciones de agregación ignorarán los valores NULL.
+
+OBTIENEN 1 SOLO DATO DE LA TABLA*
+
+- COUNT = CANTIDAD
+Devuelve un único resultado indicando la cantidad de filas/registros 
+que cumplen con el criterio.
+
+EJ - modo de empleo:
+
+SELECT COUNT (*) FROM movies   -> Devuelve la cantidad de registros de al tabla movies!
+WHERE genre_id=3 -> Devuelve la cantidad de peliculas de la tabla movies con el 
+genero_ide 3 y lo muestra en una columna denominada total.
+
+
+- AVG(average) = OBTENCIÓN DE PROMEDIOS
+Devueleve UN  único resultado indicando el promedio de uan columna cuyo TIPO DE DATOS DEBE SER NÚMERICO
+
+
+SELECT AVG(rating) FROM movies   -> Devuleve el promedio del rating de las peliculas de la tabla movies!
+ 
+
+
+- SUM = SUMA
+Delvuelve UN único resultado indicando la SUMA de una columna cuyo TIPO DE DATOS DEBE SER NÚMERICO
+
+ej:
+SELECT SUM(length) FROM movies -> Devuleve la suma de las duraciones de las peliculas de la tabla movies* 
+
+Tambien se le puede aplicar el filtro para la sumatoria de las peliculas de la guerra de las galaxias por ejemplo
+WHERE title like "La guerra%"
+
+
+
+- MIN = VALOR MINIMO
+
+SELECT MAX(rating), COUNT(*) <- Columna
+FROM movies   -> Delvolvera el rating de la pelicula menos ranqueada
+WHERE title like "La guerra%"
+
+En minimo se puede aplicar el filtro WHERE o quitarlo y salen los valores de la tabla
+
+ 
+- MAX = VALOR MÁXIMO
+Max si permite colocar varios valores en el SELECT
+
+EJ - modo de empleo:
+
+SELECT MAX(rating), COUNT(*) <- Columna
+FROM movies   -> Delvolvera el rating de la pelicula mejor ranqueada!
+WHERE title like "La guerra%"
+
+                       
+					               
+			GROUP BY
+Nos va a permitir agrupar los registros de la tabla resultante de una consulta por una o más columnas, según nos sea necesario.
+Se usa para agrupar los registros de la tabla resultante de una consulta por una o más columnas.
+Ej:
+
+SELECT columna_1
+FROM nombre_tabla
+WHERE condition
+CROUP BY columna_1
+
+NOTA: las consultas que contienen la cláusula GROUP BY se denominan CONSULTAS AGRUPADAS y solo devuelven UNA SOLA FILA
+para cada elemento agrupado
+
+			HAVING
+El HAVING cumple con la misma condición del WHERE, a diferencia de que HAVING permite la implementación de ALIAS
+y FUNCIONES DE AGREGACIÓN en las condiones de la selección de DATOS. 
+			
+			ej:
+			SELECT columna_1
+			FROM nombre_tabla
+			WHERE condition
+			GROUP BY columna_1
+			HAVING condition_Group
+			ORDER BY columna_1
+			
+
+>>¡ojo!— esta solo se va a poder usar en conjunto con las funciones de agregación para filtrar datos agregados. 
+Es importante tener en cuenta esto porque para cualquier otro escenario la herramienta que tendremos que utilizar es el WHERE.<<		
+			
+
+
+SELECT = Lista de selección
+FROM = Origen de datos
+WHERE = Condición de selección
+GROUP BY = Columnas de agrupación
+HAVING = Condición de selección
+ORDER BY = Columnas de ordenación
+
+
+
+        USO IN
+WHERE algo IN conjunto
+
